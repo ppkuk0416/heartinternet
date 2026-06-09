@@ -1,26 +1,132 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #1e1b18;
+  --muted: #706960;
+  --paper: #f7f3eb;
+  --surface: #fffdf8;
+  --surface-strong: #ffffff;
+  --line: #e5ddd1;
+  --brand: #d45a36;
+  --brand-dark: #a83b22;
+  --gold: #e9b64c;
+  --green: #2f7d61;
+  --shadow: 0 14px 40px rgba(73, 53, 33, 0.1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(233, 182, 76, 0.12), transparent 28rem),
+    radial-gradient(circle at 95% 8%, rgba(212, 90, 54, 0.09), transparent 30rem),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-geist-sans), "Apple SD Gothic Neo", "Noto Sans KR",
+    sans-serif;
+}
+
+a,
+button,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(212, 90, 54, 0.2);
+}
+
+:focus-visible {
+  outline: 3px solid rgba(212, 90, 54, 0.35);
+  outline-offset: 3px;
+}
+
+.site-frame {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.page-shell {
+  width: min(1180px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--brand-dark);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  font-size: clamp(1.55rem, 2.4vw, 2.15rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.2;
+}
+
+.section-copy {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+.surface {
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 248, 0.9);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+}
+
+.soft-grid {
+  background-image:
+    linear-gradient(rgba(82, 58, 35, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(82, 58, 35, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .page-shell {
+    width: min(100% - 1.25rem, 1180px);
+  }
 }

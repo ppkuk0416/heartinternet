@@ -1,0 +1,21 @@
+{
+  "event": {
+    "newsId": "24276663",
+    "officialUrl": "https://news.blizzard.com/en-us/article/24276663/the-hearthstone-spring-championship-is-here",
+    "name": "2026 Hearthstone Spring Championship",
+    "sourceSlug": "blizzard-spring-championship-2026",
+    "sourceName": "Blizzard Esports · 2026 Spring Championship",
+    "patchVersion": "35.6",
+    "format": "standard",
+    "startsAt": "2026-06-05T07:00:00Z"
+  },
+  "submissions": [
+    {
+      "externalId": "replace-with-official-submission-id",
+      "playerName": "Replace with player name",
+      "deckCode": "AAECAQcBAQEBAQEBAQEBAQEBAQEBAQEBAQE=",
+      "claimedRank": "Replace with placement",
+      "notes": "Example only. Replace every submission field with the operator-verified deck list before write mode."
+    }
+  ]
+}

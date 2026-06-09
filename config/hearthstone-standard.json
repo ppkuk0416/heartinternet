@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-06-06",
+  "standardSetSlugs": [
+    "CORE",
+    "EMERALD_DREAM",
+    "THE_LOST_CITY",
+    "TIME_TRAVEL",
+    "CATACLYSM"
+  ],
+  "standardLegalCardIds": [],
+  "pendingSetSlugs": ["ESCAPEFROM_VIOLET_HOLD"],
+  "sources": [
+    "https://hearthstone.blizzard.com/en-gb/expansions-adventures/",
+    "https://hearthstone.blizzard.com/en-us/news/24276665/35-6-patch-notes"
+  ],
+  "note": "Update this reviewed configuration at every rotation, expansion launch, or early card release. Pending sets are never treated as fully Standard-legal."
+}

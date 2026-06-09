@@ -1,0 +1,21 @@
+{
+  "sources": [
+    {
+      "feedUrl": "https://www.reddit.com/r/CompetitiveHS/.rss",
+      "allowedHosts": ["www.reddit.com"],
+      "patchVersion": "35.6",
+      "maxAgeHours": 168,
+      "maxEntries": 100,
+      "excludedAuthors": ["/u/AutoModerator", "/u/deck-code-bot", "/u/[deleted]"],
+      "source": {
+        "slug": "competitivehs-reddit",
+        "name": "CompetitiveHS Reddit",
+        "sourceType": "community",
+        "homepageUrl": "https://www.reddit.com/r/CompetitiveHS/",
+        "ingestionMode": "json_feed",
+        "trustTier": 1,
+        "pollIntervalMinutes": 60
+      }
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "source": {
+    "slug": "official-event-example",
+    "name": "Official Event Example",
+    "sourceType": "tournament",
+    "homepageUrl": "https://hearthstone.blizzard.com/",
+    "ingestionMode": "manual",
+    "trustTier": 3,
+    "pollIntervalMinutes": 360
+  },
+  "providerRevision": "manual-2026-06-07",
+  "items": [
+    {
+      "externalId": "event-2026-player-a-deck-1",
+      "sourceUrl": "https://hearthstone.blizzard.com/",
+      "sourcePublishedAt": "2026-06-07T00:00:00Z",
+      "title": "Example recent tournament deck",
+      "playerName": "Example Player",
+      "eventName": "Example Event",
+      "claimedRank": "Top 8",
+      "classSlug": "warrior",
+      "patchVersion": "35.6",
+      "format": "standard",
+      "wins": 5,
+      "losses": 2,
+      "metadata": {
+        "note": "Replace with a permitted source record and real deck code."
+      }
+    }
+  ]
+}

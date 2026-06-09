@@ -1,0 +1,51 @@
+name: Check Hearthstone patch
+
+on:
+  schedule:
+    - cron: "23 15 * * *"
+  workflow_dispatch:
+    inputs:
+      activate:
+        description: "Activate the detected patch in Supabase"
+        required: true
+        default: false
+        type: boolean
+      card_legality_reviewed:
+        description: "Standard card legality config was reviewed for this patch"
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: hearthstone-patch-check
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Check official patch feed
+        if: ${{ github.event_name == 'schedule' || !inputs.activate }}
+        run: npm run patch:check
+
+      - name: Activate reviewed patch
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.activate }}
+        env:
+          CARD_LEGALITY_REVIEWED: ${{ inputs.card_legality_reviewed }}
+        run: npm run patch:activate
