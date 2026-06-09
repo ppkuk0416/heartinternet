@@ -74,6 +74,7 @@ The repository currently contains the public technical alpha:
 - Moderator content-readiness checklist for public beta launch criteria
 - User-facing privacy notice and community rules
 - Public beta operations runbook for collection, moderation, incidents, and release evidence
+- GitHub quality gates for lint, types, tests, migrations, build, and dependency audit
 - Explicit demo fallback only when public Supabase configuration is absent
 
 External error tracking, staging evidence, and user validation remain future

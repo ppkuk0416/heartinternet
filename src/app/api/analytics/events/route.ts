@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { requestAddress } from "@/server/analytics/deck-copy";
 import {
@@ -31,6 +32,10 @@ export async function POST(request: NextRequest) {
 
   const client = await createServerSupabaseClient();
   if (!client) {
+    return NextResponse.json({ tracked: false, reason: "unconfigured" });
+  }
+  const adminClient = createAdminSupabaseClient();
+  if (!adminClient) {
     return NextResponse.json({ tracked: false, reason: "unconfigured" });
   }
 
@@ -75,7 +80,7 @@ export async function POST(request: NextRequest) {
     deckId = deck?.id ?? null;
   }
 
-  const { error } = await client.from("product_events").insert({
+  const { error } = await adminClient.from("product_events").insert({
     event_name: parsed.data.eventName,
     user_id: user?.id ?? null,
     anonymous_hash: user ? null : anonymousHash,

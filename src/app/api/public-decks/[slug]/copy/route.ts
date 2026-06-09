@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { createAdminSupabaseClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import {
   createAnonymousDeckCopyHash,
@@ -41,6 +42,14 @@ export async function POST(
   const {
     data: { user },
   } = await client.auth.getUser();
+  const adminClient = createAdminSupabaseClient();
+  if (!adminClient) {
+    return NextResponse.json({
+      tracked: false,
+      reason: "tracking_unconfigured",
+    });
+  }
+
   let anonymousHash: string | null = null;
   if (!user) {
     const secret = process.env.COPY_EVENT_HASH_SECRET;
@@ -65,8 +74,9 @@ export async function POST(
     }
   }
 
-  const { data, error } = await client.rpc("record_deck_copy", {
+  const { data, error } = await adminClient.rpc("record_server_deck_copy", {
     target_deck_id: deck.id,
+    attributed_user_id: user?.id ?? null,
     anonymous_visitor_hash: anonymousHash,
   });
   if (error) {

@@ -106,6 +106,7 @@ async function assertSchema() {
     "deck_candidates",
     "deck_candidate_observations",
     "patch_transitions",
+    "product_events",
   ]) {
     assert(names.has(expected), `missing table: ${expected}`);
   }
@@ -127,6 +128,53 @@ async function assertAuthorizationAndConstraints() {
   const ownerId = "30000000-0000-4000-8000-000000000001";
   const otherId = "30000000-0000-4000-8000-000000000002";
   const moderatorId = "30000000-0000-4000-8000-000000000003";
+
+  const telemetryPrivileges = await db.query(`
+    select
+      has_table_privilege('anon', 'public.product_events', 'insert') as anon_event_insert,
+      has_table_privilege('authenticated', 'public.product_events', 'insert')
+        as authenticated_event_insert,
+      has_function_privilege(
+        'anon',
+        'public.record_deck_copy(uuid,text)',
+        'execute'
+      ) as anon_legacy_copy,
+      has_function_privilege(
+        'authenticated',
+        'public.record_deck_copy(uuid,text)',
+        'execute'
+      ) as authenticated_legacy_copy,
+      has_function_privilege(
+        'service_role',
+        'public.record_server_deck_copy(uuid,uuid,text)',
+        'execute'
+      ) as service_copy
+  `);
+  assertEqual(
+    telemetryPrivileges.rows[0].anon_event_insert,
+    false,
+    "anonymous product event inserts are server-only",
+  );
+  assertEqual(
+    telemetryPrivileges.rows[0].authenticated_event_insert,
+    false,
+    "authenticated product event inserts are server-only",
+  );
+  assertEqual(
+    telemetryPrivileges.rows[0].anon_legacy_copy,
+    false,
+    "anonymous legacy copy RPC is disabled",
+  );
+  assertEqual(
+    telemetryPrivileges.rows[0].authenticated_legacy_copy,
+    false,
+    "authenticated legacy copy RPC is disabled",
+  );
+  assertEqual(
+    telemetryPrivileges.rows[0].service_copy,
+    true,
+    "service copy RPC is available",
+  );
 
   await db.exec(`
     insert into auth.users (id, email, raw_user_meta_data)
