@@ -30,6 +30,13 @@ const baseInput = {
   analytics: {
     events24h: 12,
   },
+  monitoring: {
+    configured: true,
+    valid: true,
+    environment: "staging",
+    release: "release-123",
+    detail: "HTTPS error collector is configured.",
+  },
 };
 
 describe("operations status summary", () => {
@@ -40,6 +47,10 @@ describe("operations status summary", () => {
     expect(summary.cards.find((card) => card.key === "tracking")).toMatchObject({
       severity: "ok",
       value: "3회",
+    });
+    expect(summary.cards.find((card) => card.key === "monitoring")).toMatchObject({
+      severity: "ok",
+      value: "연결 설정",
     });
   });
 
@@ -76,6 +87,24 @@ describe("operations status summary", () => {
     expect(summary.cards.find((card) => card.key === "analytics")).toMatchObject({
       severity: "warning",
       detail: "최근 24시간 제품 이벤트가 없습니다.",
+    });
+  });
+
+  it("warns when error monitoring is not configured", () => {
+    const summary = buildOperationsStatusSummary({
+      ...baseInput,
+      monitoring: {
+        configured: false,
+        valid: false,
+        environment: "production",
+        detail: "ERROR_MONITORING_ENDPOINT is not configured.",
+      },
+    });
+
+    expect(summary.overall).toBe("warning");
+    expect(summary.cards.find((card) => card.key === "monitoring")).toMatchObject({
+      severity: "warning",
+      value: "설정 필요",
     });
   });
 });

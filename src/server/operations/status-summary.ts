@@ -1,3 +1,8 @@
+import {
+  getErrorMonitoringStatus,
+  type ErrorMonitoringStatus,
+} from "@/server/observability/error-monitoring";
+
 export type OperationsSeverity = "ok" | "warning" | "critical";
 
 export type OperationsStatusCard = {
@@ -47,6 +52,7 @@ export type OperationsStatusInput = {
   analytics: {
     events24h: number;
   };
+  monitoring?: ErrorMonitoringStatus;
 };
 
 export function buildOperationsStatusSummary(
@@ -59,6 +65,7 @@ export function buildOperationsStatusSummary(
     cardSyncCard(input),
     patchCard(input),
     analyticsCard(input),
+    monitoringCard(input.monitoring ?? getErrorMonitoringStatus()),
   ];
 
   return {
@@ -173,6 +180,18 @@ function analyticsCard(input: OperationsStatusInput): OperationsStatusCard {
         ? "최근 24시간 제품 이벤트가 없습니다."
         : "최근 24시간 제품 이벤트가 수집 중입니다.",
     href: "/admin/analytics",
+  };
+}
+
+function monitoringCard(status: ErrorMonitoringStatus): OperationsStatusCard {
+  const release = status.release ? ` · release ${status.release.slice(0, 12)}` : "";
+
+  return {
+    key: "monitoring",
+    label: "오류 추적",
+    severity: status.valid ? "ok" : "warning",
+    value: status.valid ? "연결 설정" : "설정 필요",
+    detail: `${status.environment}${release} · ${status.detail}`,
   };
 }
 
