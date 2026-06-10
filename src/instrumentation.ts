@@ -1,6 +1,8 @@
 import { reportServerError } from "@/server/observability/error-monitoring";
 
-export async function register() {}
+export function register() {
+  return;
+}
 
 export async function onRequestError(
   error: unknown,
