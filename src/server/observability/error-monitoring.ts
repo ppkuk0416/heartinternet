@@ -1,6 +1,8 @@
 const DEFAULT_TIMEOUT_MS = 3_000;
 const MAX_STACK_LENGTH = 12_000;
 
+type MonitoringEnvironment = Record<string, string | undefined>;
+
 export type ErrorMonitoringConfig = {
   endpoint: string;
   token?: string;
@@ -46,7 +48,7 @@ export type ServerErrorEvent = {
 };
 
 export function readErrorMonitoringConfig(
-  env: NodeJS.ProcessEnv = process.env,
+  env: MonitoringEnvironment = process.env,
 ): ErrorMonitoringConfig | null {
   const endpoint = env.ERROR_MONITORING_ENDPOINT?.trim();
   if (!endpoint) return null;
@@ -70,7 +72,7 @@ export function readErrorMonitoringConfig(
 }
 
 export function getErrorMonitoringStatus(
-  env: NodeJS.ProcessEnv = process.env,
+  env: MonitoringEnvironment = process.env,
 ): ErrorMonitoringStatus {
   const environment = env.APP_ENV?.trim() || env.NODE_ENV || "development";
   const release =
@@ -141,7 +143,7 @@ export async function reportServerError(
   error: unknown,
   context: ServerErrorContext = {},
   options: {
-    env?: NodeJS.ProcessEnv;
+    env?: MonitoringEnvironment;
     fetchImpl?: typeof fetch;
   } = {},
 ): Promise<boolean> {
