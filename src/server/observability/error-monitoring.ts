@@ -1,5 +1,4 @@
 const DEFAULT_TIMEOUT_MS = 3_000;
-const MAX_MESSAGE_LENGTH = 2_000;
 const MAX_STACK_LENGTH = 12_000;
 
 export type ErrorMonitoringConfig = {
@@ -122,11 +121,9 @@ export function createServerErrorEvent(
     environment: config.environment,
     release: config.release,
     error: {
-      name: normalized.name,
-      message: truncate(normalized.message, MAX_MESSAGE_LENGTH),
-      stack: normalized.stack
-        ? truncate(normalized.stack, MAX_STACK_LENGTH)
-        : undefined,
+      name: sanitizeErrorName(normalized.name),
+      message: "Server request failed",
+      stack: sanitizeStack(normalized.stack),
     },
     request: {
       method: context.method,
@@ -192,16 +189,34 @@ function normalizeError(error: unknown) {
   if (error instanceof Error) {
     return {
       name: error.name || "Error",
-      message: error.message || "Unknown server error",
       stack: error.stack,
     };
   }
 
   return {
     name: "Error",
-    message: typeof error === "string" ? error : "Unknown server error",
     stack: undefined,
   };
+}
+
+function sanitizeErrorName(value: string) {
+  return /^[A-Za-z0-9_.:-]{1,80}$/.test(value) ? value : "Error";
+}
+
+function sanitizeStack(value?: string) {
+  if (!value) return undefined;
+
+  const frames = value.split("\n").slice(1).join("\n").trim();
+  if (!frames) return undefined;
+
+  return truncate(redactSensitiveText(frames), MAX_STACK_LENGTH);
+}
+
+function redactSensitiveText(value: string) {
+  return value
+    .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, "[redacted-email]")
+    .replace(/[A-Za-z0-9+/]{48,}={0,2}/g, "[redacted-long-token]")
+    .replace(/https?:\/\/[^\s)]+/gi, (url) => sanitizePath(url) ?? "[redacted-url]");
 }
 
 function sanitizePath(value?: string) {
