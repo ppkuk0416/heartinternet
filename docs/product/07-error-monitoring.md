@@ -21,20 +21,20 @@ The application treats a missing or non-HTTPS endpoint as a warning on `/admin/o
 Server error events contain only:
 
 - timestamp, environment, and release identifier
-- error name, bounded message, and bounded stack
+- bounded error name, a fixed generic message, and stack frames without the original message line
 - request method and URL path without query or fragment
 - Next.js route metadata
 
-The adapter does not copy request headers, cookies, request bodies, email fields, comments, or raw deck codes. Collector access logs and retention settings must follow the same restriction.
+The adapter does not copy original error messages, request headers, cookies, request bodies, email fields, comments, or raw deck codes. It also redacts emails and long token-like values from stack frames. Collector access logs and retention settings must follow the same restriction.
 
 ## Staging verification
 
 1. Configure the endpoint, token, `APP_ENV=staging`, and release identifier.
 2. Deploy the branch or merged release to staging.
 3. Run `npm run monitoring:test` with the same deployment variables.
-4. Confirm one event named `HearthDeck Hub monitoring smoke test` in the collector.
+4. Confirm one event named `HearthDeckMonitoringSmokeTest` in the collector.
 5. Confirm the event includes the staging environment and expected release.
-6. Confirm no query string, token, email, comment body, or raw deck code is present.
+6. Confirm no original message, query string, token, email, comment body, or raw deck code is present.
 7. Save the collector screenshot or event URL in GitHub issue #2.
 8. Verify `/admin/operations` shows error monitoring as configured.
 
