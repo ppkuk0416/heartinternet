@@ -32,9 +32,11 @@ describe("error monitoring", () => {
     });
   });
 
-  it("removes query strings and fragments from request paths", () => {
+  it("removes query strings, fragments, and original error messages", () => {
+    const sensitiveMessage =
+      "comment from user@example.com with deck AAECAZICAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQ==";
     const event = createServerErrorEvent(
-      new Error("boom"),
+      new Error(sensitiveMessage),
       {
         method: "POST",
         path: "/decks/123?email=user@example.com#private",
@@ -45,8 +47,10 @@ describe("error monitoring", () => {
 
     expect(event.request).toEqual({ method: "POST", path: "/decks/123" });
     expect(event.context.routePath).toBe("/decks/[id]");
+    expect(event.error.message).toBe("Server request failed");
     expect(JSON.stringify(event)).not.toContain("user@example.com");
     expect(JSON.stringify(event)).not.toContain("raw-deck-code");
+    expect(JSON.stringify(event)).not.toContain("AAECAZIC");
   });
 
   it("does not throw when the external collector is unavailable", async () => {
