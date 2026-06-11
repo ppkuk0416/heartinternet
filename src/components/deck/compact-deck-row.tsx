@@ -5,8 +5,16 @@ import { CopyDeckButton } from "@/components/deck/copy-deck-button";
 import { EvidenceBadge } from "@/components/deck/evidence-badge";
 import type { Deck } from "@/lib/types";
 
+const sourceRoles: Record<string, string> = {
+  "대회 덱": "대회 참가 선수",
+  "등급전·랭커 덱": "등급전 플레이어",
+  "콘텐츠 제작자 덱": "콘텐츠 제작자",
+  "외부 통계 덱": "통계 기반 출처",
+  "커뮤니티 덱": "커뮤니티 기여자",
+};
+
 export function CompactDeckRow({ deck }: { deck: Deck }) {
-  const authorRole = roleForSource(deck.sourceType, deck.authorRole);
+  const authorRole = sourceRoles[deck.sourceType] ?? deck.authorRole;
   const freshness = deck.lastTrackedAt ?? deck.updatedAt;
 
   return (
@@ -89,17 +97,5 @@ export function CompactDeckRow({ deck }: { deck: Deck }) {
         />
       </div>
     </article>
-  );
-}
-
-function roleForSource(sourceType: string, fallback: string) {
-  return (
-    {
-      "대회 덱": "대회 참가 선수",
-      "등급전·랭커 덱": "등급전 플레이어",
-      "콘텐츠 제작자 덱": "콘텐츠 제작자",
-      "외부 통계 덱": "통계 기반 출처",
-      "커뮤니티 덱": "커뮤니티 기여자",
-    }[sourceType] ?? fallback
   );
 }
