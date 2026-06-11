@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { Clock3, Copy, ExternalLink, MessageCircle } from "lucide-react";
+import {
+  Clock3,
+  Copy,
+  ExternalLink,
+  MessageCircle,
+  TrendingUp,
+} from "lucide-react";
 import { ClassEmblem } from "@/components/deck/class-emblem";
 import { CopyDeckButton } from "@/components/deck/copy-deck-button";
 import { EvidenceBadge } from "@/components/deck/evidence-badge";
@@ -71,13 +77,22 @@ export function CompactDeckRow({ deck }: { deck: Deck }) {
       </div>
 
       <div className="flex items-center gap-3 pl-11 sm:pl-0">
-        <div className="flex min-w-24 items-center justify-end gap-3 text-xs text-[var(--muted)]">
+        <div className="flex min-w-32 items-center justify-end gap-3 text-xs text-[var(--muted)]">
+          {typeof deck.recentCopies === "number" && (
+            <span
+              aria-label={`최근 7일 ${deck.recentCopies.toLocaleString()}회 복사`}
+              className="inline-flex items-center gap-1 font-extrabold text-[var(--brand-dark)]"
+            >
+              <TrendingUp size={13} />
+              7일 {deck.recentCopies.toLocaleString()}회
+            </span>
+          )}
           <span
             aria-label={`누적 ${deck.copies.toLocaleString()}회 복사`}
-            className="inline-flex items-center gap-1 font-extrabold text-[var(--ink)]"
+            className="inline-flex items-center gap-1 font-bold text-[var(--ink)]"
           >
             <Copy size={13} />
-            {deck.copies.toLocaleString()}회
+            누적 {deck.copies.toLocaleString()}회
           </span>
           <Link
             href={`/decks/${deck.slug}#discussion`}
