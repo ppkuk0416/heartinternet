@@ -54,6 +54,7 @@ export type Deck = {
   favorites?: number;
   comments: number;
   copies: number;
+  recentCopies?: number;
   updatedAt: string;
   trendScore?: number;
   trackingSourceCount?: number;

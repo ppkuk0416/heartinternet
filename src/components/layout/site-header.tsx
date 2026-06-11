@@ -5,12 +5,12 @@ import {
   ClipboardCheck,
   FileJson,
   Flame,
-  Menu,
   Radar,
   Search,
   ShieldAlert,
   UserRound,
 } from "lucide-react";
+import { MobileSiteMenu } from "@/components/layout/mobile-site-menu";
 import { getCurrentUser } from "@/lib/auth/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -39,13 +39,22 @@ export async function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm font-semibold md:flex">
-          <Link href="/decks" className="transition-colors hover:text-[var(--brand)]">
+          <Link
+            href="/decks"
+            className="transition-colors hover:text-[var(--brand)]"
+          >
             덱 찾기
           </Link>
-          <Link href="/decks?tag=초보+추천" className="transition-colors hover:text-[var(--brand)]">
+          <Link
+            href="/decks?tag=초보+추천"
+            className="transition-colors hover:text-[var(--brand)]"
+          >
             초보 추천
           </Link>
-          <Link href="/submit" className="transition-colors hover:text-[var(--brand)]">
+          <Link
+            href="/submit"
+            className="transition-colors hover:text-[var(--brand)]"
+          >
             덱 등록
           </Link>
         </nav>
@@ -132,13 +141,7 @@ export async function SiteHeader() {
               로그인
             </Link>
           )}
-          <button
-            type="button"
-            aria-label="메뉴 열기"
-            className="grid size-10 place-items-center rounded-full border border-[var(--line)] bg-white/70 md:hidden"
-          >
-            <Menu size={19} />
-          </button>
+          <MobileSiteMenu signedIn={Boolean(user)} isModerator={isModerator} />
         </div>
       </div>
     </header>

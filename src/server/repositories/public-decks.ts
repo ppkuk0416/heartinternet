@@ -40,6 +40,7 @@ type PublicDeckRow = {
   recommendation_count: number;
   comment_count: number;
   copy_count: number;
+  recent_copy_count: number;
   trend_score: number;
   tracking_source_count: number;
   last_tracked_at: string | null;
@@ -83,10 +84,7 @@ export async function getPublicDecks(
   }
 
   const [firstAttempt, currentPatch] = await Promise.all([
-    runCatalogQuery(client, query, {
-      page,
-      pageSize,
-    }),
+    runCatalogQuery(client, query, { page, pageSize }),
     getCurrentPatch(client),
   ]);
 
@@ -301,6 +299,7 @@ function mapPublicDeck(row: PublicDeckRow): Deck {
     recommendations: row.recommendation_count,
     comments: row.comment_count,
     copies: row.copy_count,
+    recentCopies: row.recent_copy_count,
     trendScore: row.trend_score,
     trackingSourceCount: row.tracking_source_count,
     lastTrackedAt: row.last_tracked_at

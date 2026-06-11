@@ -48,7 +48,7 @@ export function CopyDeckButton({
     secondary:
       "h-11 rounded-xl border border-[var(--line)] bg-white px-4 text-[var(--ink)] hover:border-[var(--brand)] hover:text-[var(--brand)]",
     compact:
-      "h-9 rounded-lg border border-[var(--line)] bg-white/80 px-3 text-xs text-[var(--ink)] hover:border-[var(--brand)] hover:text-[var(--brand)]",
+      "h-9 rounded-lg bg-[var(--brand)] px-3 text-xs text-white shadow-[0_6px_14px_rgba(212,90,54,.16)] hover:bg-[var(--brand-dark)]",
   };
 
   return (
