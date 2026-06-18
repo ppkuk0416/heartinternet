@@ -24,7 +24,8 @@
     "decks:event:dry-run": "tsx scripts/import-official-event.ts",
     "decks:event": "tsx scripts/import-official-event.ts --write",
     "patch:check": "tsx scripts/check-hearthstone-patch.ts",
-    "patch:activate": "tsx scripts/check-hearthstone-patch.ts --write --approve"
+    "patch:activate": "tsx scripts/check-hearthstone-patch.ts --write --approve",
+    "monitoring:test": "tsx scripts/send-error-monitoring-test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",

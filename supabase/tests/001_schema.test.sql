@@ -1,5 +1,5 @@
 begin;
-select plan(39);
+select plan(42);
 
 select has_table('public', 'profiles', 'profiles table exists');
 select has_table('public', 'decks', 'decks table exists');
@@ -8,6 +8,7 @@ select has_table('public', 'deck_cards', 'deck_cards table exists');
 select has_table('public', 'card_classes', 'multi-class card relation exists');
 select has_table('public', 'source_evidence', 'source evidence table exists');
 select has_table('public', 'comments', 'comments table exists');
+select has_table('public', 'comment_likes', 'comment helpful reactions table exists');
 select has_table('public', 'reports', 'reports table exists');
 select has_table('public', 'moderation_audits', 'moderation audit table exists');
 select has_table('public', 'deck_tracking_sources', 'deck tracking sources exist');
@@ -18,6 +19,7 @@ select has_table('public', 'patch_transitions', 'patch transition audit exists')
 
 select col_is_pk('public', 'deck_likes', array['user_id', 'deck_id'], 'recommendations are unique per user and deck');
 select col_is_pk('public', 'favorites', array['user_id', 'deck_id'], 'favorites are unique per user and deck');
+select col_is_pk('public', 'comment_likes', array['user_id', 'comment_id'], 'helpful reactions are unique per user and comment');
 select has_index('public', 'patches', 'patches_one_current_idx', 'only one current patch index exists');
 select has_index('public', 'deck_codes', 'deck_codes_hash_idx', 'deck code hash index exists');
 select has_index('public', 'decks', 'decks_published_idx', 'published deck index exists');
@@ -106,6 +108,7 @@ select has_column(
 select trigger_is('public', 'deck_codes', 'deck_codes_immutable', 'public', 'protect_immutable_deck_code', 'deck code versions are immutable');
 select trigger_is('public', 'deck_cards', 'deck_cards_validate_total', 'public', 'validate_deck_card_total', 'card rows must match deck card count');
 select trigger_is('public', 'decks', 'decks_validate_active_code', 'public', 'validate_active_deck_code', 'published deck active code is validated');
+select trigger_is('public', 'comment_likes', 'comment_likes_update_count', 'public', 'update_comment_helpful_count', 'comment helpful counts are maintained by trigger');
 
 select * from finish();
 rollback;

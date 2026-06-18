@@ -65,6 +65,9 @@ describe("DeckDiscussion", () => {
             authorName: "테스터",
             createdAt: "2026. 6. 7.",
             canDelete: true,
+            canReact: false,
+            helpful: false,
+            helpfulCount: 0,
           },
         ]}
       />,

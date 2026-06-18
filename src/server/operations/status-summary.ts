@@ -47,6 +47,9 @@ export type OperationsStatusInput = {
   analytics: {
     events24h: number;
   };
+  monitoring: {
+    configured: boolean;
+  };
 };
 
 export function buildOperationsStatusSummary(
@@ -59,6 +62,7 @@ export function buildOperationsStatusSummary(
     cardSyncCard(input),
     patchCard(input),
     analyticsCard(input),
+    monitoringCard(input),
   ];
 
   return {
@@ -173,6 +177,18 @@ function analyticsCard(input: OperationsStatusInput): OperationsStatusCard {
         ? "최근 24시간 제품 이벤트가 없습니다."
         : "최근 24시간 제품 이벤트가 수집 중입니다.",
     href: "/admin/analytics",
+  };
+}
+
+function monitoringCard(input: OperationsStatusInput): OperationsStatusCard {
+  return {
+    key: "monitoring",
+    label: "오류 추적",
+    severity: input.monitoring.configured ? "ok" : "warning",
+    value: input.monitoring.configured ? "설정됨" : "미설정",
+    detail: input.monitoring.configured
+      ? "외부 수집 엔드포인트가 설정되었습니다. 테스트 이벤트 수신을 확인해주세요."
+      : "ERROR_MONITORING_ENDPOINT를 설정하고 테스트 이벤트를 확인해주세요.",
   };
 }
 

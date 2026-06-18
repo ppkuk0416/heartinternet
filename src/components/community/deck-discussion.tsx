@@ -3,6 +3,7 @@
 import { LoaderCircle, MessageCircle, Send, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { CommentHelpfulButton } from "@/components/community/comment-helpful-button";
 import { ReportButton } from "@/components/community/report-button";
 import type { PublicDeckComment } from "@/server/repositories/deck-comments";
 
@@ -180,6 +181,14 @@ export function DeckDiscussion({
                   <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-[#514b44]">
                     {comment.body}
                   </p>
+                  <CommentHelpfulButton
+                    commentId={comment.id}
+                    authenticated={authenticated}
+                    canReact={comment.canReact}
+                    initialActive={comment.helpful}
+                    initialCount={comment.helpfulCount}
+                    returnPath={returnPath}
+                  />
                 </article>
               ))}
             </div>
