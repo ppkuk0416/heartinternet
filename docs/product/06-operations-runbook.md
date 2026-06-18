@@ -72,6 +72,15 @@ HearthDeck Hub의 핵심 약속인 `현재 패치의 신뢰할 수 있는 덱 �
 4. 치명적 회귀가 있으면 이전 배포로 롤백하고 쓰기 기능을 필요한 범위만 잠근다.
 5. 복구 후 사용자 흐름과 운영 대시보드를 다시 확인한다.
 
+## 외부 오류 추적
+
+- 서버 렌더링, Route Handler, Server Action, Proxy 오류는 Next.js `onRequestError`에서 수집한다.
+- `ERROR_MONITORING_ENDPOINT`는 HTTPS 수집 URL이어야 하며, 선택적으로 `ERROR_MONITORING_TOKEN`을 Bearer 토큰으로 사용한다.
+- `APP_ENV`와 `APP_RELEASE`를 지정해 스테이징·프로덕션 및 배포 버전을 구분한다. Vercel에서는 미지정 시 `VERCEL_ENV`, `VERCEL_GIT_COMMIT_SHA`를 사용한다.
+- 요청 URL의 query와 fragment, 헤더, 쿠키, 본문은 오류 이벤트에 포함하지 않는다. 댓글 본문, 이메일, 덱 코드도 전송하지 않는다.
+- 수집 실패는 사용자 요청을 실패시키지 않으며 3초 후 중단한다.
+- 배포 후 `npm run monitoring:test`를 실행하고 외부 수집기에서 테스트 이벤트 수신을 확인한다.
+
 ## 개인정보와 비밀값
 
 - raw 덱 코드, 이메일, 댓글 본문을 제품 분석 이벤트에 기록하지 않는다.

@@ -8,6 +8,9 @@ export type PublicDeckComment = {
   authorName: string;
   createdAt: string;
   canDelete: boolean;
+  canReact: boolean;
+  helpful: boolean;
+  helpfulCount: number;
 };
 
 export type DeckDiscussionResult = {
@@ -21,6 +24,7 @@ type CommentRow = {
   author_id: string;
   body: string;
   created_at: string;
+  helpful_count: number;
   profiles: { display_name: string } | null;
 };
 
@@ -57,9 +61,10 @@ export async function getDeckDiscussion(
 
   const { data, error } = await client
     .from("comments")
-    .select("id,author_id,body,created_at,profiles(display_name)")
+    .select("id,author_id,body,created_at,helpful_count,profiles(display_name)")
     .eq("deck_id", deck.id)
     .eq("status", "visible")
+    .order("helpful_count", { ascending: false })
     .order("created_at", { ascending: false })
     .limit(100);
   if (error) {
@@ -68,6 +73,22 @@ export async function getDeckDiscussion(
       authenticated: Boolean(user),
       unavailable: true,
     };
+  }
+
+  const likedCommentIds = new Set<string>();
+  if (user && data && data.length > 0) {
+    const { data: likes, error: likesError } = await client
+      .from("comment_likes")
+      .select("comment_id")
+      .eq("user_id", user.id)
+      .in(
+        "comment_id",
+        data.map((comment) => comment.id),
+      );
+    if (likesError) {
+      return { comments: [], authenticated: true, unavailable: true };
+    }
+    for (const like of likes ?? []) likedCommentIds.add(like.comment_id);
   }
 
   return {
@@ -79,6 +100,9 @@ export async function getDeckDiscussion(
         dateStyle: "medium",
       }).format(new Date(comment.created_at)),
       canDelete: comment.author_id === user?.id,
+      canReact: comment.author_id !== user?.id,
+      helpful: likedCommentIds.has(comment.id),
+      helpfulCount: Number(comment.helpful_count),
     })),
     authenticated: Boolean(user),
     unavailable: false,

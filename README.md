@@ -65,12 +65,12 @@ The repository currently contains the public technical alpha:
 - Non-blocking, privacy-preserving daily deck-copy counting
 - Authenticated recommendation and favorite toggles on deck detail
 - Owner-only saved-deck library with direct favorite removal
-- Deck discussion with authenticated comments, author deletion, and reporting
+- Deck discussion with authenticated comments, helpful-vote ranking, author deletion, and reporting
 - Moderator report queue with transactional target hiding and audit logging
 - Moderator official-event import screen with dry-run validation before writes
 - MVP product analytics events for discovery, detail, copy, and submission flow
 - Moderator product analytics dashboard for the 7-day MVP funnel
-- Moderator operations status dashboard for collection, moderation, patch, card, and analytics health
+- Moderator operations status dashboard for collection, moderation, patch, card, analytics, and error-monitoring health
 - Moderator content-readiness checklist for public beta launch criteria
 - User-facing privacy notice and community rules
 - Public beta operations runbook for collection, moderation, incidents, and release evidence
@@ -134,6 +134,12 @@ Moderators can check launch operations at
 This page summarizes recent deck collection runs, stale active sources, report
 backlog, candidate review pressure, card sync status, patch review needs, and
 analytics event flow into `ok`, `warning`, or `critical` cards.
+
+Server errors captured by Next.js instrumentation can be sent to a provider-neutral HTTPS collector. Configure `ERROR_MONITORING_ENDPOINT` and optionally `ERROR_MONITORING_TOKEN`, `APP_ENV`, and `APP_RELEASE`. Query strings, headers, cookies, and request bodies are never included. Verify each staging or production connection with:
+
+```bash
+npm run monitoring:test
+```
 
 Moderators can check content readiness at
 [http://localhost:3000/admin/content-readiness](http://localhost:3000/admin/content-readiness).

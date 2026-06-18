@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { isErrorMonitoringConfigured } from "@/server/observability/error-monitoring";
 import {
   buildOperationsStatusSummary,
   type OperationsStatusSummary,
@@ -40,6 +41,7 @@ export async function getOperationsStatusSummary({
       cards: { latestStatus: "missing" },
       patch: { requiresCardReview: false },
       analytics: { events24h: 0 },
+      monitoring: { configured: isErrorMonitoringConfigured() },
     });
   }
 
@@ -121,6 +123,7 @@ export async function getOperationsStatusSummary({
       cards: { latestStatus: "missing" },
       patch: { requiresCardReview: false },
       analytics: { events24h: 0 },
+      monitoring: { configured: isErrorMonitoringConfigured() },
     });
   }
 
@@ -161,6 +164,9 @@ export async function getOperationsStatusSummary({
     },
     analytics: {
       events24h: analyticsEvents.count,
+    },
+    monitoring: {
+      configured: isErrorMonitoringConfigured(),
     },
   });
 }

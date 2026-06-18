@@ -30,6 +30,9 @@ const baseInput = {
   analytics: {
     events24h: 12,
   },
+  monitoring: {
+    configured: true,
+  },
 };
 
 describe("operations status summary", () => {
@@ -64,6 +67,19 @@ describe("operations status summary", () => {
     expect(summary.cards.find((card) => card.key === "patch")?.severity).toBe(
       "critical",
     );
+  });
+
+  it("warns when error monitoring is not configured", () => {
+    const summary = buildOperationsStatusSummary({
+      ...baseInput,
+      monitoring: { configured: false },
+    });
+
+    expect(summary.overall).toBe("warning");
+    expect(summary.cards.find((card) => card.key === "monitoring")).toMatchObject({
+      severity: "warning",
+      value: "미설정",
+    });
   });
 
   it("warns when analytics events stop arriving", () => {
