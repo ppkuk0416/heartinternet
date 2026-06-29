@@ -55,7 +55,7 @@ Use [`08-launch-content-playbook.md`](08-launch-content-playbook.md) as the work
 ## Next Build Milestones
 
 1. Make the home page goal-led: today recommendation, fast climb, low dust, beginner-friendly. — **In progress in PR #16**
-2. Ensure deck cards expose the most important decision signals above the fold.
+2. Ensure deck cards expose the most important decision signals above the fold. — **In progress in PR #16 via difficulty and recommended-for signals**
 3. Add or polish a meta summary surface that explains the current patch in plain Korean. — **In progress in PR #16 via `/meta`**
 4. Provide a public about/contact surface for trust and ad-review readiness. — **In progress in PR #16 via `/about`**
 5. Connect Supabase and replace demo data with curated launch content. — **Guided by `09-deployment-and-monetization-checklist.md`**
