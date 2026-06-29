@@ -16,6 +16,7 @@ Product decisions and release scope are maintained in:
 - [`docs/product/05-validation-plan.md`](docs/product/05-validation-plan.md)
 - [`docs/product/06-operations-runbook.md`](docs/product/06-operations-runbook.md)
 - [`docs/product/07-monetization-mvp-goal.md`](docs/product/07-monetization-mvp-goal.md)
+- [`docs/product/08-launch-content-playbook.md`](docs/product/08-launch-content-playbook.md)
 
 ## Current Status
 
@@ -77,6 +78,7 @@ The repository currently contains the public technical alpha:
 - Public beta operations runbook for collection, moderation, incidents, and release evidence
 - Monetizable MVP positioning around Korean mobile deck decisions
 - Public meta guide plus about/contact surface for trust and ad-review readiness
+- Launch content playbook for preparing 30 current-patch decks without fabricating data claims
 - GitHub quality gates for lint, types, tests, migrations, build, and dependency audit
 - Explicit demo fallback only when public Supabase configuration is absent
 
