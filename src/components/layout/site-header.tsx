@@ -42,7 +42,7 @@ export async function SiteHeader() {
           <Link href="/decks" className="transition-colors hover:text-[var(--brand)]">
             오늘 추천
           </Link>
-          <Link href="/decks?sort=trending" className="transition-colors hover:text-[var(--brand)]">
+          <Link href="/meta" className="transition-colors hover:text-[var(--brand)]">
             메타 덱
           </Link>
           <Link href="/decks?tag=저가루" className="transition-colors hover:text-[var(--brand)]">
