@@ -5,7 +5,6 @@ import {
   ClipboardCheck,
   FileJson,
   Flame,
-  Menu,
   Radar,
   Search,
   ShieldAlert,
@@ -13,6 +12,7 @@ import {
 } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth/server";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { MobileNav } from "@/components/layout/mobile-nav";
 
 export async function SiteHeader() {
   const user = await getCurrentUser();
@@ -25,7 +25,7 @@ export async function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--line)] bg-[rgba(247,243,235,0.88)] backdrop-blur-xl">
-      <div className="page-shell flex h-16 items-center justify-between gap-5">
+      <div className="page-shell relative flex h-16 items-center justify-between gap-5">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2.5 font-extrabold tracking-[-0.04em]"
@@ -135,13 +135,7 @@ export async function SiteHeader() {
               로그인
             </Link>
           )}
-          <button
-            type="button"
-            aria-label="메뉴 열기"
-            className="grid size-10 place-items-center rounded-full border border-[var(--line)] bg-white/70 md:hidden"
-          >
-            <Menu size={19} />
-          </button>
+          <MobileNav isSignedIn={Boolean(user)} />
         </div>
       </div>
     </header>
