@@ -17,6 +17,7 @@ Product decisions and release scope are maintained in:
 - [`docs/product/06-operations-runbook.md`](docs/product/06-operations-runbook.md)
 - [`docs/product/07-monetization-mvp-goal.md`](docs/product/07-monetization-mvp-goal.md)
 - [`docs/product/08-launch-content-playbook.md`](docs/product/08-launch-content-playbook.md)
+- [`docs/product/templates/launch-decks.csv`](docs/product/templates/launch-decks.csv)
 
 ## Current Status
 
@@ -78,7 +79,7 @@ The repository currently contains the public technical alpha:
 - Public beta operations runbook for collection, moderation, incidents, and release evidence
 - Monetizable MVP positioning around Korean mobile deck decisions
 - Public meta guide plus about/contact surface for trust and ad-review readiness
-- Launch content playbook for preparing 30 current-patch decks without fabricating data claims
+- Launch content playbook and 30-row CSV template for preparing current-patch decks without fabricating data claims
 - GitHub quality gates for lint, types, tests, migrations, build, and dependency audit
 - Explicit demo fallback only when public Supabase configuration is absent
 
@@ -262,6 +263,6 @@ src/server/decks/        Draft request contracts
 src/server/deckstrings/  Decode, canonicalize, hash, validate, preview
 src/server/deck-tracking/ Feed parsing, validation, scoring, persistence
 src/server/repositories/ Supabase-first data access with safe fallbacks
-supabase/migrations/     PostgreSQL schema, constraints, RLS, sync history
+supabase/migrations/     PostgreSQL schema, constraints, RLS sync history
 supabase/tests/          pgTAP schema and policy checks
 ```
