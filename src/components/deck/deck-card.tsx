@@ -94,6 +94,15 @@ export function DeckCard({
           </p>
         </Link>
 
+        <div className="mt-4 grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 rounded-2xl bg-[#f7f1e8] px-3 py-2.5 text-xs">
+          <span className="font-bold text-[var(--muted)]">난이도</span>
+          <span className="font-extrabold text-[var(--ink)]">{deck.difficulty}</span>
+          <span className="font-bold text-[var(--muted)]">추천</span>
+          <span className="line-clamp-1 font-extrabold text-[var(--ink)]">
+            {deck.recommendedFor}
+          </span>
+        </div>
+
         <div className="mt-4 flex flex-wrap gap-1.5">
           {(deck.trackingSourceCount ?? 0) > 0 && (
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[0.68rem] font-bold text-emerald-800">
