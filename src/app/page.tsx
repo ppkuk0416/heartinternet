@@ -40,7 +40,7 @@ export default async function Home() {
               <div className="text-sm font-extrabold">
                 현재 패치 {currentPatch}
               </div>
-              <div className="text-xs text-[var(--muted)]">최신성 표시로 오래된 덱 구분</div>
+              <div className="text-xs text-[var(--muted)]">오래된 덱과 최신 덱을 먼저 구분</div>
             </div>
           </div>
           <div className="surface flex items-center gap-3 rounded-2xl px-4 py-3.5">
@@ -48,8 +48,8 @@ export default async function Home() {
               <Sparkles size={19} />
             </span>
             <div>
-              <div className="text-sm font-extrabold">근거가 보이는 기록</div>
-              <div className="text-xs text-[var(--muted)]">작성자 입력과 확인된 출처 분리</div>
+              <div className="text-sm font-extrabold">숫자보다 선택 이유</div>
+              <div className="text-xs text-[var(--muted)]">출처·반응·운영 난이도를 함께 표시</div>
             </div>
           </div>
           <div className="surface flex items-center gap-3 rounded-2xl px-4 py-3.5">
@@ -58,7 +58,7 @@ export default async function Home() {
             </span>
             <div>
               <div className="text-sm font-extrabold">복사까지 90초 이내</div>
-              <div className="text-xs text-[var(--muted)]">찾고 이해하고 바로 플레이</div>
+              <div className="text-xs text-[var(--muted)]">모바일에서 보고 바로 게임으로</div>
             </div>
           </div>
         </div>
@@ -67,9 +67,9 @@ export default async function Home() {
       {featured.length > 0 && (
         <section className="page-shell py-10">
           <SectionHeader
-            eyebrow="Recommended"
-            title="커뮤니티 추천 덱"
-            copy="현재 패치에서 추천 반응과 최신성을 함께 살펴보세요."
+            eyebrow="Today picks"
+            title="오늘 바로 돌릴 추천 덱"
+            copy="등반, 안정성, 재미, 제작 비용을 함께 보고 지금 플레이할 덱을 고르세요."
             href="/decks"
           />
           <div className="mt-6 grid gap-4 md:grid-cols-3">
@@ -84,9 +84,9 @@ export default async function Home() {
         <section className="border-y border-[var(--line)] bg-[#efe8dc]/60 py-14">
           <div className="page-shell">
             <SectionHeader
-              eyebrow="Popular now"
+              eyebrow="Player signal"
               title="지금 많이 복사한 덱"
-              copy="현재 패치에서 실제 코드 복사가 많은 덱을 먼저 보여줍니다."
+              copy="사이트 안에서 실제 복사가 많은 덱을 보여줘서 체감 인기 흐름을 빠르게 잡습니다."
               href="/decks?sort=copies"
             />
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -104,7 +104,7 @@ export default async function Home() {
             <div className="lg:sticky lg:top-24">
               <span className="eyebrow">
                 <Flame size={14} />
-                First deck
+                Easy start
               </span>
               <h2 className="section-title mt-3">
                 처음이라면,
@@ -141,9 +141,9 @@ export default async function Home() {
         <section className="border-y border-[var(--line)] bg-white/55 py-14">
           <div className="page-shell">
             <SectionHeader
-              eyebrow="Fresh and sourced"
-              title="최근 주목받는 신뢰 덱"
-              copy="현재 패치에서 최근 관측되고 원본 출처가 확인된 덱을 우선합니다."
+              eyebrow="Meta context"
+              title="출처가 보이는 메타 후보"
+              copy="최근 관측된 출처와 현재 패치 여부를 함께 보여줘서 숫자를 맹신하지 않게 합니다."
               href="/decks?trust=verified&sort=trending"
             />
             <div className="mt-6 grid gap-4 md:grid-cols-3">
