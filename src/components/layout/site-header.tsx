@@ -40,10 +40,13 @@ export async function SiteHeader() {
 
         <nav className="hidden items-center gap-7 text-sm font-semibold md:flex">
           <Link href="/decks" className="transition-colors hover:text-[var(--brand)]">
-            덱 찾기
+            오늘 추천
           </Link>
-          <Link href="/decks?tag=초보+추천" className="transition-colors hover:text-[var(--brand)]">
-            초보 추천
+          <Link href="/decks?sort=trending" className="transition-colors hover:text-[var(--brand)]">
+            메타 덱
+          </Link>
+          <Link href="/decks?tag=저가루" className="transition-colors hover:text-[var(--brand)]">
+            저가루
           </Link>
           <Link href="/submit" className="transition-colors hover:text-[var(--brand)]">
             덱 등록
