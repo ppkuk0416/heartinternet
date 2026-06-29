@@ -15,9 +15,15 @@ export function SiteFooter() {
             기술 알파에서는 덱의 패치와 근거 라벨을 확인한 뒤 사용해주세요.
           </p>
         </div>
-        <div className="flex gap-5">
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <Link href="/about" className="hover:text-[var(--ink)]">
+            소개·문의
+          </Link>
           <Link href="/decks" className="hover:text-[var(--ink)]">
             덱 찾기
+          </Link>
+          <Link href="/meta" className="hover:text-[var(--ink)]">
+            메타 기준
           </Link>
           <Link href="/rules" className="hover:text-[var(--ink)]">
             이용 안내
