@@ -17,6 +17,7 @@ Product decisions and release scope are maintained in:
 - [`docs/product/06-operations-runbook.md`](docs/product/06-operations-runbook.md)
 - [`docs/product/07-monetization-mvp-goal.md`](docs/product/07-monetization-mvp-goal.md)
 - [`docs/product/08-launch-content-playbook.md`](docs/product/08-launch-content-playbook.md)
+- [`docs/product/09-deployment-and-monetization-checklist.md`](docs/product/09-deployment-and-monetization-checklist.md)
 - [`docs/product/templates/launch-decks.csv`](docs/product/templates/launch-decks.csv)
 
 ## Current Status
