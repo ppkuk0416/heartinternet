@@ -70,7 +70,7 @@ The same deck can carry multiple tags, but the launch set should still feel dive
 
 ## Spreadsheet Columns
 
-If preparing content outside the app first, use these columns:
+If preparing content outside the app first, use [`templates/launch-decks.csv`](templates/launch-decks.csv). It contains 30 candidate rows with these columns:
 
 ```text
 status,class,archetype,title,deck_code,patch,tags,summary,featured_reason,dust_estimate,difficulty,source_type,source_url,wins,losses,game_plan,mulligan,strengths,weaknesses,card_choices,last_reviewed,reviewer,notes
