@@ -76,6 +76,7 @@ The repository currently contains the public technical alpha:
 - User-facing privacy notice and community rules
 - Public beta operations runbook for collection, moderation, incidents, and release evidence
 - Monetizable MVP positioning around Korean mobile deck decisions
+- Public meta guide plus about/contact surface for trust and ad-review readiness
 - GitHub quality gates for lint, types, tests, migrations, build, and dependency audit
 - Explicit demo fallback only when public Supabase configuration is absent
 
