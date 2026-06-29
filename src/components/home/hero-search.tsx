@@ -1,11 +1,29 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Search, Sparkles } from "lucide-react";
+import { ArrowRight, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
 import { CLASS_OPTIONS } from "@/lib/decks";
 
-const goals = ["초보 추천", "저가루", "빠른 등반", "쉬운 운영", "전설 유저"];
+const goals = ["오늘 추천", "빠른 등반", "저가루", "초보 추천", "메타 안전픽", "재미 덱"];
+
+const decisionPaths = [
+  {
+    label: "빠르게 등반",
+    description: "짧은 판수와 명확한 승리 플랜",
+    href: "/decks?tag=빠른+등반",
+  },
+  {
+    label: "가루 아끼기",
+    description: "제작 부담이 낮은 덱부터 확인",
+    href: "/decks?tag=저가루",
+  },
+  {
+    label: "쉽게 시작",
+    description: "멀리건과 운영 목표가 쉬운 덱",
+    href: "/decks?tag=초보+추천",
+  },
+];
 
 export function HeroSearch({
   isDemo = false,
@@ -33,16 +51,38 @@ export function HeroSearch({
       <div className="relative z-10 max-w-3xl">
         <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-bold text-[#f6dba0]">
           <Sparkles size={14} />
-          패치 {currentPatch} · {isDemo ? "기술 알파 데모" : "공개 덱"}
+          패치 {currentPatch} · {isDemo ? "UX 데모" : "오늘의 덱 결정"}
         </span>
-        <h1 className="max-w-2xl text-[clamp(2.3rem,6vw,4.6rem)] font-black leading-[1.02] tracking-[-0.065em]">
-          오늘은 어떤 덱으로
-          <span className="block text-[#f1bd55]">플레이할까요?</span>
+        <h1 className="max-w-3xl text-[clamp(2.25rem,6vw,4.55rem)] font-black leading-[1.02] tracking-[-0.065em]">
+          오늘 랭크에서
+          <span className="block text-[#f1bd55]">뭘 돌릴지 3분 안에</span>
         </h1>
-        <p className="mt-5 max-w-xl text-sm leading-7 text-white/65 sm:text-base">
-          목적에 맞는 덱을 발견하고, 믿을 수 있는 근거와 운영법을 확인한 뒤
-          한 번에 게임으로 가져가세요.
+        <p className="mt-5 max-w-2xl text-sm leading-7 text-white/68 sm:text-base">
+          승률 숫자만 던지지 않습니다. 현재 패치, 복사 반응, 출처, 멀리건,
+          운영 난이도를 함께 보여줘서 바로 플레이할 덱을 고르게 돕습니다.
         </p>
+
+        <div className="mt-6 grid max-w-3xl gap-2 sm:grid-cols-3">
+          {decisionPaths.map((path) => (
+            <button
+              key={path.label}
+              type="button"
+              onClick={() => router.push(path.href)}
+              className="group rounded-2xl border border-white/12 bg-white/7 p-4 text-left transition hover:border-[#f1bd55]/50 hover:bg-white/12"
+            >
+              <span className="flex items-center justify-between gap-3 text-sm font-extrabold text-white">
+                {path.label}
+                <ArrowRight
+                  size={15}
+                  className="text-[#f1bd55] transition group-hover:translate-x-0.5"
+                />
+              </span>
+              <span className="mt-1 block text-xs leading-5 text-white/55">
+                {path.description}
+              </span>
+            </button>
+          ))}
+        </div>
 
         <form
           onSubmit={submit}
