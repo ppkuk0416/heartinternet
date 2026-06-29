@@ -263,6 +263,6 @@ src/server/decks/        Draft request contracts
 src/server/deckstrings/  Decode, canonicalize, hash, validate, preview
 src/server/deck-tracking/ Feed parsing, validation, scoring, persistence
 src/server/repositories/ Supabase-first data access with safe fallbacks
-supabase/migrations/     PostgreSQL schema, constraints, RLS sync history
+supabase/migrations/     PostgreSQL schema, constraints, RLS, sync history
 supabase/tests/          pgTAP schema and policy checks
 ```
