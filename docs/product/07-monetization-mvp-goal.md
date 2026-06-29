@@ -42,6 +42,8 @@ Before applying for advertising, the public site should have:
 - Supabase-backed content rather than undisclosed demo data;
 - product analytics for list views, detail views, copies, and submissions.
 
+Use [`08-launch-content-playbook.md`](08-launch-content-playbook.md) as the working checklist for preparing the 30-deck launch batch without fabricating data claims.
+
 ## Product Principles
 
 - **Do not fabricate win-rate authority.** Show win rates only when the source and method are clear.
@@ -57,6 +59,6 @@ Before applying for advertising, the public site should have:
 3. Add or polish a meta summary surface that explains the current patch in plain Korean. — **In progress in PR #16 via `/meta`**
 4. Provide a public about/contact surface for trust and ad-review readiness. — **In progress in PR #16 via `/about`**
 5. Connect Supabase and replace demo data with curated launch content.
-6. Seed 30 launch decks with complete guides and evidence labels.
+6. Seed 30 launch decks with complete guides and evidence labels. — **Guided by `08-launch-content-playbook.md`**
 7. Validate the mobile flow from discovery to detail to copy.
 8. Add advertising only after the site has enough content depth to avoid looking thin.
