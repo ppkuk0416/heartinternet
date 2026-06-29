@@ -55,7 +55,8 @@ Before applying for advertising, the public site should have:
 1. Make the home page goal-led: today recommendation, fast climb, low dust, beginner-friendly. — **In progress in PR #16**
 2. Ensure deck cards expose the most important decision signals above the fold.
 3. Add or polish a meta summary surface that explains the current patch in plain Korean. — **In progress in PR #16 via `/meta`**
-4. Connect Supabase and replace demo data with curated launch content.
-5. Seed 30 launch decks with complete guides and evidence labels.
-6. Validate the mobile flow from discovery to detail to copy.
-7. Add advertising only after the site has enough content depth to avoid looking thin.
+4. Provide a public about/contact surface for trust and ad-review readiness. — **In progress in PR #16 via `/about`**
+5. Connect Supabase and replace demo data with curated launch content.
+6. Seed 30 launch decks with complete guides and evidence labels.
+7. Validate the mobile flow from discovery to detail to copy.
+8. Add advertising only after the site has enough content depth to avoid looking thin.
